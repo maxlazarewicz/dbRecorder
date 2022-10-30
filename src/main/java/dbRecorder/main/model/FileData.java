@@ -2,6 +2,7 @@ package dbRecorder.main.model;
 
 import com.sun.istack.NotNull;
 import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -22,7 +23,7 @@ public class FileData {
     @NonNull
     byte[] fileData;
 
-    @DateTimeFormat
+    @CreationTimestamp
     Date addedDay;
 
     @NonNull
