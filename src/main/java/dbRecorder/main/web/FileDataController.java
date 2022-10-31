@@ -12,6 +12,8 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
+
 @Slf4j
 @RestController
 @RequestMapping("/filedata")
@@ -50,6 +52,26 @@ public class FileDataController {
     public ResponseEntity deleteFileData(@PathVariable Long id){
         fileDataService.deleteFileData(id);
         return new ResponseEntity("File Data with id: " + id + "delete successful", HttpStatus.OK);
+    }
+
+    @Operation(summary = "Gets a File by name")
+    @GetMapping("/list/name/{originalFileName}")
+    @PreAuthorize("permitAll")
+    public ResponseEntity getFileDataByOriginalName(@PathVariable String originalFileName){
+        return new ResponseEntity(fileDataService.findFileDataByName(originalFileName), HttpStatus.OK);
+    }
+
+    @Operation(summary = "Gets File by AddedDay (Date)")
+    @GetMapping("/list/date/{addedDay}")
+    @PreAuthorize("permitAll")
+    public ResponseEntity getFileByAddedDay(@PathVariable Date addedDay){
+        return new ResponseEntity(fileDataService.findFileDataByAddedDay(addedDay), HttpStatus.OK);
+    }
+    @Operation(summary = "Getting File by  content type")
+    @GetMapping("/list/content/{contentType}")
+    public ResponseEntity getFileByContentType(@PathVariable String contentType){
+        return new ResponseEntity(fileDataService.findFileDataByContentType(contentType), HttpStatus.OK);
+
     }
 
 

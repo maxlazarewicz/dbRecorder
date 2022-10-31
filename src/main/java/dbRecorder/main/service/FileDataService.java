@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -33,9 +34,24 @@ public class FileDataService extends Commons {
     public FileData addFileData(FileData fileData){
         return fileDataRepository.saveAndFlush(fileData);
     }
+
     @Transactional
     public void deleteFileData(Long id){
         fileDataRepository.deleteById(id);
+    }
+
+    @Transactional
+    public FileData findFileDataByName(String originalFileName){
+        return fileDataRepository.findFileDataByNamedParams(originalFileName);
+    }
+
+    @Transactional
+    public FileData findFileDataByAddedDay(Date addedDay){
+        return fileDataRepository.findFileDataByAddedDay(addedDay);
+    }
+    @Transactional
+    public FileData findFileDataByContentType(String contentType){
+        return fileDataRepository.findFileDataByContentType(contentType);
     }
 
 }
