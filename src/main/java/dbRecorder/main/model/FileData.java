@@ -1,5 +1,7 @@
 package dbRecorder.main.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sun.istack.NotNull;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
@@ -23,7 +25,11 @@ public class FileData {
     @NonNull
     byte[] fileData;
 
+    @JsonFormat(timezone = "Europe/Warsaw")
     @CreationTimestamp
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name="added_day",nullable = false, updatable = false)
+    @JsonIgnore
     Date addedDay;
 
     @NonNull

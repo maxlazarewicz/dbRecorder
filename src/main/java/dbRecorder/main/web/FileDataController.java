@@ -33,7 +33,7 @@ public class FileDataController {
     }
 
     @Operation(summary = "Gets a FileData after a given id")
-    @GetMapping("list/{id}")
+    @GetMapping("/list/{id}")
     @PreAuthorize("permitAll")
     public ResponseEntity getFileDataById(@PathVariable Long id){
         return new ResponseEntity(fileDataService.getFileDataById(id), HttpStatus.OK);
@@ -73,7 +73,4 @@ public class FileDataController {
         return new ResponseEntity(fileDataService.findFileDataByContentType(contentType), HttpStatus.OK);
 
     }
-
-
-
 }
